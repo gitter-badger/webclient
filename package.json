@@ -1,0 +1,49 @@
+{
+  "name": "webclient",
+  "version": "0.0.1",
+  "description": "Webclient for the leavylip platform.",
+  "main": "index.js",
+  "scripts": {
+    "install": "jspm install && cd dev/static_server/ && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeavyLip/webclient.git"
+  },
+  "keywords": [
+    "leavylip",
+    "webclient",
+    "reactjs",
+    "react",
+    "es6",
+    "react-router",
+    "altjs"
+  ],
+  "author": "Wilbert van de Ridder (LeavyLip)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeavyLip/webclient/issues"
+  },
+  "homepage": "https://github.com/LeavyLip/webclient#readme",
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "fetch": "npm:whatwg-fetch@^0.9.0",
+      "material-ui": "npm:material-ui@^0.8.0",
+      "modernizr": "github:Modernizr/Modernizr@^2.8.3",
+      "react": "npm:react@0.13.3",
+      "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.1.7",
+      "whatwg-fetch": "npm:whatwg-fetch@^0.9.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  },
+  "devDependencies": {
+    "eslint": "0.22.1",
+    "eslint-plugin-react": "2.4.0"
+  }
+}
