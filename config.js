@@ -1,3 +1,6 @@
+/**
+ * SystemJS config
+ */
 System.config({
   "baseURL": "/",
   "transpiler": "babel",

@@ -2,7 +2,8 @@
 import {browserIsCompatible} from "./utils/featureChecker";
 
 // Loading message update
-document.getElementById("placeholder").innerHTML = "Checking browser compatibility";
+document.getElementById("placeholder").innerHTML = "" +
+  "Checking browser compatibility";
 
 // Check browser compatible
 if (browserIsCompatible()) {

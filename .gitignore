@@ -3,3 +3,6 @@
 
 jspm_packages/
 .idea
+npm-debug.log
+testreports/
+node_modules

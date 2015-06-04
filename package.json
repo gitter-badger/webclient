@@ -2,11 +2,15 @@
   "name": "webclient",
   "version": "0.0.1",
   "description": "Webclient for the leavylip platform.",
-  "main": "index.js",
+  "main": "app/main.js",
   "scripts": {
     "install": "jspm install && cd dev/static_server/ && npm install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pre-commit": "gulp pre-commit",
+    "postinstall": "jspm install"
   },
+  "pre-commit": [
+    "pre-commit"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeavyLip/webclient.git"
@@ -43,7 +47,38 @@
     }
   },
   "devDependencies": {
+    "babel-core": "5.4.7",
     "eslint": "0.22.1",
-    "eslint-plugin-react": "2.4.0"
+    "eslint-plugin-react": "2.4.0",
+    "esprima-fb": "15001.1.0-dev-harmony-fb",
+    "gulp": "3.9.0",
+    "gulp-cache": "0.2.9",
+    "gulp-cli": "0.2.0",
+    "gulp-eslint": "0.13.0",
+    "gulp-istanbul-enforcer": "1.0.3",
+    "gulp-karma": "0.0.4",
+    "gulp-load-plugins": "0.10.0",
+    "gulp-util": "3.0.5",
+    "gulp-watch": "4.2.4",
+    "gulp-yuidoc": "0.1.2",
+    "istanbul": "0.3.14",
+    "jasmine-core": "2.3.4",
+    "jasmine-expect": "^2.0.0-beta1",
+    "jscs": "1.13.1",
+    "karma": "0.12.35",
+    "karma-babel-preprocessor": "5.2.1",
+    "karma-cli": "0.0.4",
+    "karma-firefox-launcher": "0.1.6",
+    "karma-htmlfile-reporter": "0.2.1",
+    "karma-jasmine": "0.3.5",
+    "karma-jasmine-matchers": "2.0.0-beta1",
+    "karma-jspm": "1.1.5",
+    "karma-phantomjs-launcher": "0.2.0",
+    "karma-verbose-reporter": "0.0.2",
+    "phantomjs": "1.9.17",
+    "pre-commit": "1.0.7",
+    "react": "0.13.3",
+    "react-tools": "0.13.3",
+    "run-sequence": "1.1.0"
   }
 }
