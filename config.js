@@ -1,6 +1,3 @@
-/**
- * SystemJS config
- */
 System.config({
   "baseURL": "/",
   "transpiler": "babel",
@@ -24,6 +21,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.4.7",
     "core-js": "npm:core-js@0.9.13",
     "fetch": "npm:whatwg-fetch@0.9.0",
+    "jasmine-sinon": "npm:jasmine-sinon@0.4.0",
     "material-ui": "npm:material-ui@0.8.0",
     "modernizr": "github:Modernizr/Modernizr@2.8.3",
     "react": "npm:react@0.13.3",
@@ -84,8 +82,15 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:formatio@1.1.1": {
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "samsam": "npm:samsam@1.1.2"
+    },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:jasmine-sinon@0.4.0": {
+      "sinon": "npm:sinon@1.14.1"
     },
     "npm:jstransform@10.1.0": {
       "base62": "npm:base62@0.1.1",
@@ -125,6 +130,12 @@ System.config({
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31",
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:sinon@1.14.1": {
+      "formatio": "npm:formatio@1.1.1",
+      "lolex": "npm:lolex@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "util": "npm:util@0.10.3"
     },
     "npm:source-map@0.1.31": {
       "amdefine": "npm:amdefine@0.1.0",

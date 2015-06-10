@@ -20,7 +20,8 @@
   },
   "globals": {
     "babel": true,
-    "System": true
+    "System": true,
+    "sinon": true
   },
   "rules": {
     "strict": [2, "global"],

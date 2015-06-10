@@ -1,7 +1,3 @@
-/**
- * File: app/utils/__tests__/fetchCurrentUser-test.js
- */
-
 import Modernizr from "modernizr";
 import {browserIsCompatible, getRequiredFeatures} from "../featureChecker";
 describe("A featureChecker", function() {

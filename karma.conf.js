@@ -2,14 +2,14 @@
 module.exports = function(config) {
   config.set({
     logLevel: config.LOG_INFO, // LOG_DEBUG / LOG_INFO
-    basePath: "",
-    frameworks: ["jspm", "jasmine", "jasmine-matchers"],
-    autoWatch: true,
+    basePath: ".",
+    frameworks: ["jspm", "jasmine", "jasmine-matchers", "sinon"],
+    autoWatch: (process.env.isCI) ? false : true,
     // web server port
     port: 9876,
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: (process.env.isCI) ? true : false,
 
     jspm: {
       config: "config.js",
@@ -22,7 +22,7 @@ module.exports = function(config) {
 
     preprocessors: {
       "app/**/*-spec.js": ["babel"],
-      "app/**/!(*-spec).js": ["babel", "coverage"]
+      "app/**/!(*-spec|main).js": ["babel", "coverage"]
     },
     babelPreprocessor: {
       options: {
@@ -51,25 +51,14 @@ module.exports = function(config) {
       subPageTitle: "Unit test report"
     },
 
-    browsers: (process.env.isCI) ? ["PhantomJS", "Firefox", "Chrome"] : ["PhantomJS"], // ["PhantomJS", "PhantomJS_custom"],
-
-    // you can define custom flags
-    customLaunchers: {
-      "PhantomJS_custom": {
-        base: "PhantomJS",
-        options: {
-          windowName: "my-window",
-          settings: {
-            webSecurityEnabled: false
-          }
-        },
-        flags: ["--load-images=true"],
-        debug: true
-      }
-    },
+    browsers: (process.env.isCI) ?
+      // Browsers to test in CI environment
+      ["PhantomJS", "Firefox", "Chrome"]
+      // Browsers to test in local dev environment
+      : ["PhantomJS"],
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-      exitOnResourceError: true
+      exitOnResourceError: false
     }
   });
 };

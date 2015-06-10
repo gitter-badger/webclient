@@ -34,6 +34,7 @@
     "directories": {},
     "dependencies": {
       "fetch": "npm:whatwg-fetch@^0.9.0",
+      "jasmine-sinon": "npm:jasmine-sinon@^0.4.0",
       "material-ui": "npm:material-ui@^0.8.0",
       "modernizr": "github:Modernizr/Modernizr@^2.8.3",
       "react": "npm:react@0.13.3",
@@ -64,6 +65,7 @@
     "istanbul": "0.3.14",
     "jasmine-core": "2.3.4",
     "jasmine-expect": "^2.0.0-beta1",
+    "jasmine-sinon": "0.4.0",
     "jscs": "1.13.1",
     "karma": "0.12.35",
     "karma-babel-preprocessor": "5.2.1",
@@ -74,11 +76,13 @@
     "karma-jasmine-matchers": "2.0.0-beta1",
     "karma-jspm": "1.1.5",
     "karma-phantomjs-launcher": "0.2.0",
+    "karma-sinon": "1.0.4",
     "karma-verbose-reporter": "0.0.2",
     "phantomjs": "1.9.17",
     "pre-commit": "1.0.7",
     "react": "0.13.3",
     "react-tools": "0.13.3",
-    "run-sequence": "1.1.0"
+    "run-sequence": "1.1.0",
+    "sinon": "1.14.1"
   }
 }

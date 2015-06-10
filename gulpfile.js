@@ -13,6 +13,22 @@ var gutil = require("gulp-util");
 var srcFiles = path.join(__dirname, "/app/**");
 
 /**
+ * Error utils
+ */
+function sequenceComplete(done) {
+  return function (err) {
+    if (err) {
+      var error = new Error("build sequence failed");
+      error.showStack = false;
+      done(error);
+    }
+    else {
+      done();
+    }
+  };
+}
+
+/**
  * High level tasks
  */
 // The default task
@@ -20,29 +36,33 @@ gulp.task("default", ["build", "watch"]);
 
 // Main code quality task
 gulp.task("codequality", function(cb) {
-  runSequence(["lint", "unit-test", "docs"], cb);
+  runSequence("lint", "unit-test", "docs", sequenceComplete(cb));
 });
 
 // Build task
-gulp.task("build", function(cb) {
-  runSequence(["codequality"], cb);
+gulp.task("build", function() {
+  gulp.start("codequality");
 });
 
 // Pre-commit task
 gulp.task("pre-commit", function(cb) {
-  runSequence(["codequality", "enforce-coverage"], cb);
+  runSequence("codequality", /*"enforce-coverage",*/ sequenceComplete(cb));
+});
+
+// Watch task
+gulp.task("watch", function(cb) {
+  runSequence("codequality", "watch-js", sequenceComplete(cb));
 });
 
 /**
  * Low level tasks
  */
 // Watcher
-gulp.task("watch", function () {
-  gulp.watch(srcFiles, function() {
-    gulp.start("build")
-    .on("error", function swallowError () {
-      this.emit("end");
-    });
+gulp.task("watch-js", function () {
+  gutil.log("File watch started");
+  gulp.watch(srcFiles, function(vinyl) {
+    gutil.log(gutil.colors.blue("(Watcher) File changed: " + vinyl.path));
+    gulp.start("build");
   });
 });
 
@@ -51,11 +71,8 @@ var eslint = require("gulp-eslint");
 gulp.task("lint", function() {
   return gulp.src([srcFiles, path.join(__dirname, "/*.js")])
     .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failOnError())
-    .on("error", function swallowError () {
-      this.emit("end");
-    });
+    .pipe(eslint.format("stylish"))
+    .pipe(eslint.failOnError());
 });
 
 // Unit testing
@@ -64,16 +81,23 @@ gulp.task("unit-test", function(done) {
   karma.start({
     configFile: path.join(__dirname, "/karma.conf.js"),
     singleRun: true
-  }, done);
+  }, function(exitStatus) {
+    if (exitStatus) {
+      gutil.log(gutil.colors.red("Error: Karma unit tests failed!"));
+      throw "Build failed (unit tests)";
+    }
+    done();
+  });
 });
 
 // Documentation
 var yuidoc = require("gulp-yuidoc");
 gulp.task("docs", function() {
   return gulp.src(srcFiles + "/!(*-spec).js")
-    .pipe(yuidoc())
-    .pipe(gulp.dest("./docs"))
-    .on("error", gutil.log);
+    .pipe(yuidoc.parser())
+    .pipe(yuidoc.reporter())
+    .pipe(yuidoc.generator())
+    .pipe(gulp.dest("./docs"));
 });
 
 // Code coverage
@@ -91,9 +115,5 @@ gulp.task("enforce-coverage", function () {
   };
   return gulp
     .src(path.join(__dirname, "testreports/coverage/report-json/"))
-    .pipe(coverageEnforcer(options))
-    .on("error", function swallowError (err) {
-      gutil.log(err.message);
-      this.emit("end");
-    });
+    .pipe(coverageEnforcer(options));
 });
