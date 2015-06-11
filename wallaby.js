@@ -2,13 +2,18 @@ module.exports = function () {
   var babelPreprocessor = file => require("babel").transform(file.content, {sourceMap: true});
   return {
     files: [
+      {pattern: "node_modules/react-tools/src/test/phantomjs-shims.js", instrument: false},
+      {pattern: "node_modules/jasmine-expect/dist/jasmine-matchers.js", instrument: false},
+      {pattern: "node_modules/sinon/pkg/sinon.js", instrument: false},
+
       {pattern: "jspm_packages/system.js", instrument: false},
       {pattern: "config.js", instrument: false},
 
-      {pattern: "app/**/!(*-spec).js", load: false}
+      {pattern: "app/**/*.js", load: false},
+      "!app/**/*-spec.js"
     ],
     tests: [
-      {pattern: "app/**/*spec.js", load: false}
+      {pattern: "app/**/*-spec.js", load: false}
     ],
 
     preprocessors: {
